@@ -126,7 +126,6 @@ const FileUploadForm = () => {
       </div>  
     );
   }
-  
 };
 
 export default FileUploadForm
