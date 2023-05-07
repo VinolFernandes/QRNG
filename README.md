@@ -11,4 +11,5 @@ To run the backend follow the below commands
 `cd .\flask-server\`  <br>
 `pythom -m venv venv`  <br>
 `.\venv\Scripts\activate`  <br>
+`pip install -r requirements.txt` <br>
 `python server.py`  <br>
