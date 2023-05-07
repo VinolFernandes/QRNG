@@ -2,6 +2,7 @@ import sys
 sys.path.append('path/to/venv/Lib/site-packages')
 from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit, execute,IBMQ
 from qiskit.tools.monitor import job_monitor
+import random
 
 IBMQ.enable_account('2d83cf62bb682c3c5b94ec885c851e1b01366e7b4a220c549572d904b77395f911c089cb469ca7685580db427b98940777453e49bc6afe3fa1fc8f1c77a31838')
 provider = IBMQ.get_provider(hub='ibm-q')
@@ -38,6 +39,7 @@ for facial_landmarks in result.multi_face_landmarks:
         cv2.circle(image,(x,y),2,(100,100,0),-1)
     print(data1)
     print(len(data1))
+cv2.imwrite("img2.jpeg", image)
 
 """-------------------------------------------------------------------------------------------------------"""
 def binaryToDecimal(n):
@@ -190,10 +192,45 @@ for j in seq[512:]:#set to 0
         
 output = arguments[2]
 
-result =[]
-for y in key:
-    result.append(y)
-print(result)
-# file = open(output, 'w')
+joinedKey=""
+for i in range(len(key)):
+    a=str(int(key[i]))
+    joinedKey=joinedKey+a
+print(joinedKey)
 
-# file.write(result.toString())
+def BinaryToDecimal(binary):
+        
+    binary1 = binary
+    decimal, i, n = 0, 0, 0
+    while(binary != 0):
+        dec = binary % 10
+        decimal = decimal + dec * pow(2, i)
+        binary = binary//10
+        i += 1
+    return (decimal) 
+
+str_data =' '
+count_bit=0
+for i in range(0, len(joinedKey), 2):
+    temp_data = int(joinedKey[i:i + 8])
+    decimal_data = 48+BinaryToDecimal(temp_data)%74
+    
+    if decimal_data>57 and decimal_data<65:
+        decimal_data=random.randint(48, 57)
+    if decimal_data>90 and decimal_data<97:
+        decimal_data=random.randint(48, 57) 
+    # Decoding the decimal value returned by
+    # BinarytoDecimal() function, using chr()
+    # function which return the string corresponding
+    # character for given ASCII value, and store it
+    # in str_data
+    str_data = str_data + chr(decimal_data)
+    count_bit=count_bit+1
+
+# printing the result
+print("The Binary value after string conversion is:",str_data)
+print("Number of characters: ",count_bit)
+
+file = open(output, 'w')
+
+file.write(str_data)
