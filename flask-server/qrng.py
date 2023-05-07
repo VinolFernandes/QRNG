@@ -1,6 +1,8 @@
+import sys
+sys.path.append('path/to/venv/Lib/site-packages')
 from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit, execute,IBMQ
 from qiskit.tools.monitor import job_monitor
-import sys
+
 IBMQ.enable_account('2d83cf62bb682c3c5b94ec885c851e1b01366e7b4a220c549572d904b77395f911c089cb469ca7685580db427b98940777453e49bc6afe3fa1fc8f1c77a31838')
 provider = IBMQ.get_provider(hub='ibm-q')
 
