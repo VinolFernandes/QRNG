@@ -18,10 +18,11 @@ def upload():
         subprocess.run(['python', script_path, image_path, output_path])
         print( "Compression Successfull")
 
-        compressed_image_path = "compress.jpg"
-        quantum_path = "qrng.py"
-        output_qrng = "output.txt"
-        subprocess.run(['python', quantum_path, compressed_image_path ,output_qrng])
+        quantum_path= 'qrng.py'
+        pathToCompressedImage = "compress.jpg"
+        pathToOutputFile = "file.txt"
+
+        subprocess.run(['python3',quantum_path,pathToCompressedImage,pathToOutputFile])
         print("Key generation successfull")
 
 

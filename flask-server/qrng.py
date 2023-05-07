@@ -16,7 +16,7 @@ arguments = sys.argv
 mp_face_mesh = mp.solutions.face_mesh
 face_mesh = mp_face_mesh.FaceMesh()
 #Image
-image = cv2.imread("C:/Users/vinol/OneDrive/Desktop/Project/quantum-1/flask-server/compress.jpg")
+image = cv2.imread(arguments[1])
 
 print(image)
 
@@ -188,12 +188,12 @@ for j in seq[512:]:#set to 0
     if p>=1024:#change length here
         break
         
-output = "file.txt"
+output = arguments[2]
 
 result =[]
 for y in key:
     result.append(y)
+print(result)
+# file = open(output, 'w')
 
-file = open(output, 'w')
-
-file.write(result)
+# file.write(result.toString())
