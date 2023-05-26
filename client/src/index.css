@@ -1,55 +1,128 @@
 body{
-    background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
+    /* background: linear-gradient(to bottom right, #93ffff, #9dbac9); */
+    background: linear-gradient(to bottom right, black, #9dbac9);
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
 }
+
 .contact-form{
-    background: #fff;
-    margin-top: 10%;
-    margin-bottom: 5%;
-    width: 70%;
+    background: #e7e7e7;
+    margin: 50px auto;
+    padding: 30px;
+    border: 1px solid #717171;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
+
 .contact-form .form-control{
-    border-radius:1rem;
+    margin: 10px 0;
+    border: 1px solid #070707;
+    border-radius: 5px;
+    padding: 10px;
 }
+
 .contact-image{
     text-align: center;
 }
+
 .contact-image img{
-    border-radius: 6rem;
-    width: 11%;
-    margin-top: -3%;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-top: -70px;
     transform: rotate(29deg);
 }
+
 .contact-form form{
-    padding: 14%;
+    padding: 10%;
 }
+
 .contact-form form .row{
-    margin-bottom: -7%;
+    margin-bottom: -10%;
 }
+
 .contact-form h3{
-    margin-bottom: 8%;
-    margin-top: -10%;
-    text-align: center;
-    color: #0062cc;
-    font-size:xx-large;
-    font-family: 'Inter';
+    margin-top: 0;
+    margin-left: 0;
+    /* color: #0062cc; */
+    color: rgb(80, 78, 78);
+    font-size: 1.8rem;
+    font-family: 'Inter', serif;
+    white-space: nowrap;
+    display: inline-block;
 }
+
 .contact-form .btnContact {
     width: 50%;
     border: none;
-    border-radius: 1rem;
-    padding: 1.5%;
-    background: #dc3545;
+    border-radius: 5px;
+    padding: 10px;
+    background: #0062cc;
     font-weight: 600;
     color: #fff;
     cursor: pointer;
+    margin-top: 25px;
+    margin-left: 0;
+    transition: all 0.3s ease-in-out;
 }
+
+.contact-form .btnContact:hover {
+    background: #9dbac9;
+    color: #333;
+}
+
+.buttonClicked {
+    background: #0062cc;
+    color: #fff;
+}
+
 .btnContactSubmit
 {
     width: 50%;
-    border-radius: 1rem;
-    padding: 1.5%;
+    border-radius: 5px;
+    padding: 10px;
     color: #fff;
     background-color: #0062cc;
     border: none;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.btnContactSubmit:hover {
+    background: #9dbac9;
+    color: #333;
+}
+
+.capture {
+    margin: 10px 0;
+    border: 1px solid #070707;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.btmCapture {
+    margin: 10px 0;
+    border: 1px solid #070707;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.Qrng {
+    text-align: center;
+    color: white;
+    font-family: 'Playfair Display', serif;
+}
+
+.outputKey {
+    width: 400px; /* Adjust the width as per your requirement */
+    height: 200px; /* Adjust the height as per your requirement */
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow: auto;
+    word-wrap: break-word;
+    margin: auto;
+  }
+  
+.enc {
+    text-align: center;
 }

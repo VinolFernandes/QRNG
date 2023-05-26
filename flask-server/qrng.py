@@ -183,7 +183,7 @@ print("Total number of seed values = ",len(useed))
 # Key length can be changed
 key=[]
 p=0
-for j in seq[512:]:#set to 0
+for j in seq:#set to 0
     if j[0]!=0:
         key.append(j[0])
         p=p+1

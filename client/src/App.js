@@ -15,26 +15,36 @@ const FileUploadForm = () => {
     if (file) {
       const formData = new FormData();
       formData.append('file', file);
-
+      
       try {
-        const response = await fetch('http://localhost:5000/upload', {
+         await fetch('http://localhost:5000/upload', {
           method: 'POST',
           body: formData,
-        });
+        })
+        .then(response => response.json())
+        .then(data => {
+          if(data.status === 'success') {
+            const key = data.key;
 
-        console.log(response);
+            console.log("Key", key)
 
-        // Handle the response from the backend
-        if (response.ok) {
-          console.log('File uploaded successfully');
-        } else {
-          console.error('Error uploading file');
-        }
+            const keyElement = document.getElementById('keyValue') 
+            keyElement.textContent = key
+
+            const elementButton = document.getElementById('startProcess')
+            elementButton.textContent = "Process Completed"
+          }
+          else {
+            console.error("key generation failed");
+          }
+        })
       } catch (error) {
         console.error('Error:', error);
       }
     }
   };
+
+
 
   const webcamRef = useRef(null);
   const [capturedImage, setCapturedImage] = useState(null);
@@ -43,7 +53,7 @@ const FileUploadForm = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setCapturedImage(imageSrc);
 
-    // Automatically select the captured image in the file input
+    // Automatically select the captured image as the file input
     const fileInput = document.getElementById('imgFile');
     const capturedFile = dataURLtoFile(imageSrc, 'captured_image.jpg');
     const dataTransfer = new DataTransfer();
@@ -56,11 +66,19 @@ const FileUploadForm = () => {
     const link = document.createElement('a');
     link.href = capturedImage;
     link.download = 'captured_image.jpg';
-    link.click();
+    link.click(); 
   };
 
-  // Helper function to convert data URL to File object
+  const startProcess = () => {
+    const elementButton = document.getElementById('startProcess')
+    elementButton.textContent = "Processing..."
+  }
+
+  // Helper function to convert data URL to File object(ie. Screenshot from webcam to file)
   const dataURLtoFile = (dataUrl, filename) => {
+    if (!dataUrl) {
+      return null;
+    }
     const arr = dataUrl.split(',');
     const mime = arr[0].match(/:(.*?);/)[1];
     const bstr = atob(arr[1]);
@@ -71,9 +89,11 @@ const FileUploadForm = () => {
     }
     return new File([u8arr], filename, { type: mime });
   };
+  
   if(capturedImage || file){
     return (
       <div>
+        <h1 className="Qrng">Quantum Random Key Stream Generator</h1>
         <div className="container contact-form">
           <div className="contact-image">
             <img src="quantum.png" alt="rocket_contact" />
@@ -83,19 +103,24 @@ const FileUploadForm = () => {
             <div className="row">
               <input type="file" id="imgFile" onChange={handleFileChange} className="form-control" />
               <div>
-                <div>
-                  <button onClick={captureImage}>Capture Image</button>
-                </div>
+                {/* <div>
+                  <button className="capture" onClick={captureImage}>Capture Image</button>
+                </div> */}
                 {capturedImage && (
                   <div>
                     <h2>Captured Image:</h2>
-                    <img src={capturedImage} alt="Captured" />
+                    <img id='captredImage' src={capturedImage} alt="Captured" />
                   </div>
                 )}
               </div>
-              <button type="submit" className="btnContact">Start Process</button>
+              <button type="submit" className="btnContact" id="startProcess" onClick={startProcess}>Start Process</button>
             </div>
           </form>
+          <div>
+            <h2 className='enc'>The encryption key is:</h2>
+            <div className='outputKey' id='keyValue'>
+          </div>
+          </div>
         </div>
       </div>  
     )
@@ -103,6 +128,7 @@ const FileUploadForm = () => {
   else {
     return (
       <div>
+        <h1 className="Qrng">Quantum Random Key Stream Generator</h1>
         <div className="container contact-form">
           <div className="contact-image">
             <img src="quantum.png" alt="rocket_contact" />
@@ -112,20 +138,23 @@ const FileUploadForm = () => {
             <div className="row">
               <input type="file" id="imgFile" onChange={handleFileChange} className="form-control" />
               <div>
-                <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
-                <div>
-                  <button onClick={captureImage}>Capture Image</button>
-                  {capturedImage && (
-                    <button onClick={downloadImage}>Save Image</button>
-                  )}
-                </div>
+                <button className='btmCapture' onClick={captureImage}>Capture Image</button>
+                {capturedImage && (
+                  <button onClick={downloadImage}>Save Image</button>
+                )}
               </div>
+              <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
             </div>
           </form>
+          <div>
+            <h2 className='enc'>The encryption key is:</h2>
+            <div className='outputKey' id='keyValue'>
+          </div>
+          </div>
         </div>
       </div>  
     );
   }
 };
 
-export default FileUploadForm
+export default FileUploadForm
